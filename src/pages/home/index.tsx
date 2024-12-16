@@ -1,22 +1,15 @@
-import { useEffect } from "react";
-import { api } from "../../lib/axios";
 import { Header } from "../../components/header";
 import { MdOutlineCancel, MdOutlineTableBar, MdSearch } from "react-icons/md";
 import { Card } from "../../components/card";
 import { TbEdit, TbTrash } from "react-icons/tb";
 import { PlusCircle } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const { isAdmin } = useAuth();
 
-  useEffect(() => {
-    (async () => {
-      const { data } = await api.get("/tables");
-
-      console.log(data);
-    })();
-  }, []);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -26,7 +19,7 @@ export default function Home() {
           <h1 className="text-xl pb-5 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Reservas</h1>
           <div className="flex justify-center flex-row gap-10">
             <Card onClick={() => console.log("clicou")} Icon={MdOutlineTableBar} title="Reservar" subtitle="Faça a reserva da sua mesa aqui." />
-            <Card onClick={() => console.log("clicou")} Icon={MdSearch} title="Consultar" subtitle="Consulte suas reservas agendadas." />
+            <Card onClick={() => navigate("/reservations/list")} Icon={MdSearch} title="Consultar" subtitle="Consulte suas reservas agendadas." />
             <Card onClick={() => console.log("clicou")} Icon={MdOutlineCancel} title="Cancelar" subtitle="Cancele sua reserva." />
           </div>
         </div>
