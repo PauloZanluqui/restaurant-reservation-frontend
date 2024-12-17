@@ -1,7 +1,8 @@
 import { LucideProps } from "lucide-react";
+import { IconType } from "react-icons";
 
 interface InputProps {
-  Icon: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>
+  Icon: IconType | React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>
   type: string,
   placeholder: string
   name: string
