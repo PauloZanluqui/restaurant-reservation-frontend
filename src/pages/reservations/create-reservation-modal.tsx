@@ -86,6 +86,8 @@ export default function CreateReservation({ closeCreateReservationModal }: Creat
           });
         }
       }
+    } finally { 
+      closeCreateReservationModal();
     }
   }
 

@@ -2,30 +2,13 @@ import { useEffect, useState } from "react";
 import { api } from "../../lib/axios";
 import { format } from "date-fns";
 import { X } from "lucide-react";
+import { ReservationProps, statusMap } from "../../models/reservation-models";
 
 interface ListReservationsProps {
   closeListReservationsModal: () => void;
 }
 
-enum eReservationStatus {
-  active,
-  canceled
-}
 
-const statusMap: Record<string, string> = {
-  active: "Ativa",
-  canceled: "Cancelada",
-};
-
-interface ReservationProps {
-  id: number;
-  reservationDate: Date;
-  peopleQuantity: number;
-  status: eReservationStatus;
-  table: {
-    tableNumber: number;
-  };
-}
 
 export default function ListReservations({ closeListReservationsModal }: ListReservationsProps) {
   const [reservations, setReservations] = useState<ReservationProps[]>([]);
