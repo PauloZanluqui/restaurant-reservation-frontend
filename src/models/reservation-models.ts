@@ -8,7 +8,6 @@ export interface ReservationProps {
   };
 }
 
-
 export enum eReservationStatus {
   active,
   canceled

@@ -8,11 +8,17 @@ import { useState } from "react";
 import ListReservations from "../reservations/list-reservations-modal";
 import CreateReservation from "../reservations/create-reservation-modal";
 import CancelReservation from "../reservations/cancel-reservation-modal";
+import CreateTable from "../tables/create-table-modal";
+import DeleteTable from "../tables/delete-table-modal";
+import EditTable from "../tables/edit-table-modal";
 
 export default function Home() {
   const [isListReservationsModalOpen, setIsListReservationsModalOpen] = useState(false);
   const [isCreateReservationsModalOpen, setIsCreateReservationsModalOpen] = useState(false);
   const [isCancelReservationsModalOpen, setIsCancelReservationsModalOpen] = useState(false);
+  const [isAddTablesModalOpen, setIsAddTablesModalOpen] = useState(false);
+  const [isEditTablesModalOpen, setIsEditTablesModalOpen] = useState(false);
+  const [isDeleteTablesModalOpen, setIsDeleteTablesModalOpen] = useState(false);
   const { isAdmin } = useAuth();
 
   function openListReservationsModal() {
@@ -39,6 +45,30 @@ export default function Home() {
     setIsCancelReservationsModalOpen(false);
   }
 
+  function openAddTablesModal() {
+    setIsAddTablesModalOpen(true);
+  }
+
+  function closeAddTablesModal() {
+    setIsAddTablesModalOpen(false);
+  }
+
+  function openEditTablesModal() {
+    setIsEditTablesModalOpen(true);
+  }
+
+  function closeEditTablesModal() {
+    setIsEditTablesModalOpen(false);
+  }
+
+  function openDeleteTablesModal() {
+    setIsDeleteTablesModalOpen(true);
+  }
+
+  function closeDeleteTablesModal() {
+    setIsDeleteTablesModalOpen(false);
+  }
+
   return (
     <div>
       <Header />
@@ -56,9 +86,9 @@ export default function Home() {
           <div className="text-center border py-6 px-20 bg-white border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <h1 className="text-xl pb-5 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Gestão de Mesas</h1>
             <div className="flex justify-center flex-row gap-10">
-              <Card onClick={() => console.log("clicou")} Icon={PlusCircle} title="Adicionar" subtitle="Adicione mesas ao seu restaurante." />
-              <Card onClick={() => console.log("clicou")} Icon={TbEdit} title="Editar" subtitle="Edite os atributos das mesas." />
-              <Card onClick={() => console.log("clicou")} Icon={TbTrash} title="Excluir" subtitle="Exclua ou inative as mesas." />
+              <Card onClick={openAddTablesModal} Icon={PlusCircle} title="Adicionar" subtitle="Adicione mesas ao seu restaurante." />
+              <Card onClick={openEditTablesModal} Icon={TbEdit} title="Editar" subtitle="Edite os atributos das mesas." />
+              <Card onClick={openDeleteTablesModal} Icon={TbTrash} title="Excluir" subtitle="Exclua ou inative as mesas." />
             </div>
           </div>
         ) : null}
@@ -67,6 +97,10 @@ export default function Home() {
       {isCreateReservationsModalOpen && <CreateReservation closeCreateReservationModal={closeCreateReservationsModal} />}
       {isListReservationsModalOpen && <ListReservations closeListReservationsModal={closeListReservationsModal} />}
       {isCancelReservationsModalOpen && <CancelReservation closeCancelReservationsModal={closeCancelReservationsModal} />}
+
+      {isAddTablesModalOpen && <CreateTable closeCreateTablesModal={closeAddTablesModal} />}
+      {isEditTablesModalOpen && <EditTable closeEditTablesModal={closeEditTablesModal} />}
+      {isDeleteTablesModalOpen && <DeleteTable closeDeleteTablesModal={closeDeleteTablesModal} />}
     </div>
   );
 }
